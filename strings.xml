@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">BrokerAI Seguros</string>
+    <string name="title_activity_main">BrokerAI Seguros</string>
+    <string name="package_name">com.brokerai.segurosargentinos</string>
+    <string name="custom_url_scheme">com.brokerai.segurosargentinos</string>
+</resources>
