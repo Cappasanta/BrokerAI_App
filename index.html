@@ -2,55 +2,132 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>BrokerAI - Seguros Argentinos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BrokerAI | Gestión Integral de Riesgos Argentina</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="bg-slate-900 text-slate-100 font-sans">
+<body class="bg-[#f8fafc] text-[#1e293b]">
 
-    <!-- AD-MOB SPACE (BARRA SUPERIOR) -->
-    <div class="h-12 w-full bg-black/50 flex items-center justify-center text-[10px] text-slate-500 uppercase tracking-widest border-b border-slate-800">
-        Publicidad Patrocinada
+    <!-- BARRA SUPERIOR / ADSENSE -->
+    <div class="bg-white border-b border-slate-200 py-1 overflow-hidden h-12 flex items-center justify-center">
+        <span class="text-[10px] text-slate-400 mr-2 uppercase tracking-tighter italic font-bold text-center">Espacio para Google AdSense Header</span>
     </div>
 
-    <nav class="p-4 border-b border-slate-800 bg-slate-900/90 backdrop-blur-md sticky top-0 z-50">
-        <div class="flex justify-between items-center">
-            <h1 class="text-xl font-black text-blue-500 italic">BROKER<span class="text-white font-light">AI</span></h1>
-            <select id="lang-selector" class="bg-slate-800 text-xs p-1 rounded border border-slate-700 outline-none">
-                <option value="es">Español 🇦🇷</option>
-                <option value="en">English 🇺🇸</option>
-            </select>
+    <nav class="sticky top-0 z-50 bg-[#003366] text-white p-4 shadow-xl">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-shield-halved text-blue-400 text-2xl"></i>
+                <h1 class="text-xl font-black tracking-tighter">BROKER<span class="text-blue-400 italic">AI</span></h1>
+            </div>
+            <div class="hidden md:flex gap-6 text-xs font-bold uppercase tracking-widest opacity-80">
+                <span>ART Global</span><span>Flotas PyME</span><span>Cauciones</span>
+            </div>
+            <button onclick="instalarPWA()" id="install-btn" class="hidden bg-emerald-500 hover:bg-emerald-600 px-4 py-2 rounded-lg text-xs font-bold transition-all shadow-lg animate-pulse">
+                INSTALAR APP
+            </button>
         </div>
     </nav>
 
-    <main class="p-4 max-w-xl mx-auto">
-        <!-- AGENTE IA CONTAINER -->
-        <div id="chat-container" class="bg-slate-800 rounded-3xl shadow-2xl min-h-[70vh] flex flex-col overflow-hidden border border-slate-700">
-            <div id="chat-box" class="flex-grow p-4 overflow-y-auto space-y-4 text-sm leading-relaxed">
-                <!-- Los mensajes aparecen aquí -->
-            </div>
-
-            <!-- INPUT AREA -->
-            <div class="p-4 bg-slate-900/50 border-t border-slate-700">
-                <div class="flex gap-2">
-                    <input type="text" id="user-input" placeholder="..." class="flex-1 bg-slate-800 border border-slate-600 p-3 rounded-2xl outline-none focus:border-blue-500 transition-all italic text-white">
-                    <button id="send-btn" class="bg-blue-600 p-3 rounded-2xl font-bold shadow-lg active:scale-95 transition-all">
-                        ➤
+    <main class="max-w-7xl mx-auto p-4 lg:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- SIDEBAR IZQUIERDO: SECCIONES COMERCIALES -->
+        <aside class="lg:col-span-3 space-y-6">
+            <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
+                <h3 class="text-xs font-black text-slate-400 uppercase mb-4 tracking-widest">Contratos Express</h3>
+                <div class="grid grid-cols-1 gap-3">
+                    <button onclick="iniciarSeguro('ART')" class="flex items-center gap-3 p-3 bg-slate-50 hover:bg-blue-50 border border-slate-100 rounded-2xl transition-all group">
+                        <i class="fa-solid fa-hard-hat text-blue-600 bg-white p-2 shadow-sm rounded-lg"></i>
+                        <div class="text-left"><p class="text-xs font-bold text-slate-700">ART por Días</p><p class="text-[9px] text-slate-500 uppercase">Obra y campo</p></div>
+                    </button>
+                    <button onclick="iniciarSeguro('AP')" class="flex items-center gap-3 p-3 bg-slate-50 hover:bg-emerald-50 border border-slate-100 rounded-2xl transition-all group">
+                        <i class="fa-solid fa-person-running text-emerald-600 bg-white p-2 shadow-sm rounded-lg"></i>
+                        <div class="text-left"><p class="text-xs font-bold text-slate-700">Acc. Personales</p><p class="text-[9px] text-slate-500 uppercase">Cláusula 24hs</p></div>
                     </button>
                 </div>
             </div>
-        </div>
 
-        <!-- AREA DE RESULTADOS (OCULTA INICIALMENTE) -->
-        <div id="results-area" class="mt-6 hidden animate-bounce-in">
-            <div class="bg-gradient-to-br from-emerald-900 to-emerald-950 p-6 rounded-3xl border-2 border-emerald-500 shadow-xl shadow-emerald-900/20">
-                <h3 id="res-title" class="text-emerald-400 font-black mb-2 text-lg underline"></h3>
-                <div id="res-text" class="text-slate-100 italic space-y-4"></div>
-                <button id="cta-button" class="w-full mt-6 bg-emerald-500 text-black font-black p-4 rounded-2xl shadow-lg hover:bg-emerald-400 transition-all uppercase italic">
-                </button>
+            <!-- ANUNCIO GOOGLE VERTICAL -->
+            <div class="bg-white rounded-3xl h-[400px] border-2 border-dashed border-slate-300 flex items-center justify-center text-slate-400 italic p-6 text-center text-xs">
+                Aquí Google colocará anuncios de alto costo sobre seguros de vida o accidentes laborales.
             </div>
-        </div>
+        </aside>
+
+        <!-- AREA CENTRAL: AGENTE IA (LA ESTRELLA) -->
+        <section class="lg:col-span-6 space-y-6">
+            <div class="bg-white rounded-[2.5rem] shadow-2xl overflow-hidden border border-blue-100 relative min-h-[700px] flex flex-col">
+                <div class="bg-[#003366] p-8 pb-12 relative overflow-hidden">
+                    <div class="relative z-10">
+                        <h2 class="text-2xl text-white font-black mb-1">Mesa de Operaciones IA</h2>
+                        <p class="text-blue-300 text-sm italic font-medium">Asesor Especialista Matriculado N° 002-AI</p>
+                    </div>
+                    <i class="fa-solid fa-microchip absolute -right-4 -bottom-4 text-white opacity-5 text-9xl"></i>
+                </div>
+
+                <!-- CHAT INTERACTIVO MEJORADO -->
+                <div id="chat-box" class="flex-grow p-8 overflow-y-auto space-y-6 bg-slate-50 -mt-6 rounded-t-[2.5rem] relative z-20 max-h-[450px]">
+                    <!-- Burbuja IA Welcome -->
+                    <div class="flex flex-col gap-2 ai-msg max-w-[85%]">
+                        <span class="text-[10px] font-bold text-blue-800 ml-4 uppercase opacity-50 italic">Expert Advisor AI</span>
+                        <div class="bg-white border-2 border-blue-50 p-6 rounded-3xl rounded-tl-none shadow-sm text-slate-700 leading-relaxed font-medium italic">
+                            Buenos días. Soy el agente multirriesgo de **BrokerAI**. 
+                            He sido entrenado para gestionar seguros **Automotores, Vida, ART, Cauciones y Hogar**.
+                            <br><br>
+                            Para asesorarlo correctamente: **¿Qué es lo que desea proteger o qué exigencia legal debe cubrir hoy?**
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ENTRADA DE USUARIO -->
+                <div class="p-6 bg-white border-t border-slate-100">
+                    <div class="flex gap-4">
+                        <input type="text" id="user-input" placeholder="Ej: Necesito ART por 3 días para un pintor en Rosario..." class="flex-1 p-5 rounded-3xl bg-slate-100 border-none outline-none focus:ring-4 ring-blue-50 transition-all font-semibold italic text-slate-700">
+                        <button id="send-btn" class="bg-blue-600 text-white w-14 rounded-full shadow-lg shadow-blue-200 active:scale-90 transition-transform flex items-center justify-center">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RESULTADOS MONETIZABLES -->
+            <div id="proposal-box" class="hidden transition-all transform scale-95 opacity-0 duration-500">
+                <div class="bg-emerald-50 border-2 border-emerald-500/20 p-8 rounded-[2rem] shadow-lg shadow-emerald-900/5 italic">
+                    <div class="flex items-center gap-2 text-emerald-800 mb-4">
+                        <i class="fa-solid fa-file-signature text-xl"></i>
+                        <h3 class="font-black text-xl italic uppercase">DICTAMEN TÉCNICO Y COTIZACIÓN</h3>
+                    </div>
+                    <div id="ai-response-text" class="text-emerald-900 space-y-4 mb-8"></div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <button class="bg-emerald-600 text-white p-4 rounded-2xl font-black italic shadow-lg hover:bg-emerald-700">EMITIR CONTRATO AHORA</button>
+                        <button class="bg-white border-2 border-emerald-600 text-emerald-600 p-4 rounded-2xl font-black italic hover:bg-emerald-50">VER PATROCINADORES VIP</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LADO DERECHO: DASHBOARD DE MERCADO -->
+        <aside class="lg:col-span-3 space-y-6 italic font-bold">
+            <div class="bg-gradient-to-br from-white to-blue-50 p-6 rounded-3xl shadow-sm border border-slate-200">
+                <h3 class="text-xs text-blue-800 uppercase mb-4 tracking-widest border-b pb-2 italic">Mercado Argentina 📊</h3>
+                <div class="space-y-4">
+                    <div class="flex justify-between border-b border-slate-100 pb-1 italic">
+                        <span class="text-[10px] text-slate-500 uppercase">Ranking Solvencia:</span>
+                        <span class="text-xs text-emerald-600">Sancor ▲ 4.5%</span>
+                    </div>
+                    <div class="flex justify-between border-b border-slate-100 pb-1 italic">
+                        <span class="text-[10px] text-slate-500 uppercase">Inflación Seguros:</span>
+                        <span class="text-xs text-rose-600">Alza Prevista +15%</span>
+                    </div>
+                </div>
+                <!-- GOOGLE AD RECOMENDACION -->
+                <div class="mt-6 p-4 bg-yellow-400 text-black text-[10px] text-center rounded-xl cursor-pointer font-black shadow-md uppercase">
+                    Ofertas Exclusivas Sponsors 👆
+                </div>
+            </div>
+        </aside>
+
     </main>
 
     <script src="app.js"></script>

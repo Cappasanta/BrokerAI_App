@@ -1,24 +1,14 @@
-/* Animaciones suaves para el chat */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,600;0,900;1,400&display=swap');
 
-.ai-msg, .user-msg {
-    animation: fadeIn 0.4s ease forwards;
-}
+body { font-family: 'Montserrat', sans-serif; -webkit-tap-highlight-color: transparent; }
 
-#chat-box::-webkit-scrollbar { width: 4px; }
-#chat-box::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+@keyframes aiMsgFade { from { opacity: 0; transform: translateX(-15px); } to { opacity: 1; transform: translateX(0); } }
+.ai-msg { animation: aiMsgFade 0.4s ease forwards; }
 
-/* Para que la app no haga zoom raro al tocar botones */
-input, button { touch-action: manipulation; }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
 
-.animate-bounce-in {
-    animation: spring 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
+button:active { transform: scale(0.96); }
 
-@keyframes spring {
-    0% { transform: scale(0.8); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
-}
+/* Para que la app ocupe toda la pantalla sin scroll raro en movil */
+#chat-box { overflow-x: hidden; scroll-behavior: smooth; }
